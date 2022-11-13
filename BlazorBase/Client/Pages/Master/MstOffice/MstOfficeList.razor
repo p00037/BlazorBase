@@ -1,0 +1,38 @@
+﻿@page "/MstOfficeListPage"
+@using BlazorBase.Shared.ViewModels.MstOffice
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@attribute [Authorize]
+
+<PageTitle>事業所マスタ一覧</PageTitle>
+
+@*<h1>事業所一覧</h1>*@
+
+@if (searchResultEntities == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="top-row" style="padding-left: 0!important;">
+        <RadzenLabel Text="事業所一覧" style="margin-right: auto;font-size: 1.5rem" />
+        <RadzenButton Click="@CreateNew" Icon="add" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+    </div>
+    @*<RadzenButton Click="@CreateNew" Text="新規作成" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+    <br />
+    <br />*@
+    <RadzenDataGrid AllowFiltering="false" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                Data="@searchResultEntities" TItem="M_事業所ViewEntity" ColumnWidth="200px" LogicalFilterOperator="LogicalFilterOperator.Or">
+        <Columns>
+            <RadzenDataGridColumn Width="60px" TItem="M_事業所ViewEntity" Frozen="true" Sortable="false">
+                <Template Context="data">
+                    <RadzenLink Path="@data.Url" Text="編集" Icon="open_in_new" />
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="M_事業所ViewEntity" Property="事業所番号" Title="事業所番号" Frozen="true" Width="100px" />
+            <RadzenDataGridColumn TItem="M_事業所ViewEntity" Property="事業所名" Title="事業所名" Width="200px" />
+            <RadzenDataGridColumn TItem="M_事業所ViewEntity" Property="住所" Title="住所" Width="200px" />
+            <RadzenDataGridColumn TItem="M_事業所ViewEntity" Property="電話番号" Title="電話番号" Width="150px" />
+        </Columns>
+    </RadzenDataGrid>
+}

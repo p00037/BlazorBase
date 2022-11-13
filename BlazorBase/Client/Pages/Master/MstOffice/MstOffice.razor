@@ -1,0 +1,177 @@
+﻿@page "/MstOfficePage"
+@page "/MstOfficePage/{EditMode:int}"
+@page "/MstOfficePage/{EditMode:int}/{OfficeNo}"
+@using BlazorBase.Shared.ViewModels.MstOffice
+@using BlazorBase.Shared.Entities;
+
+<style>
+    form .row {
+        margin-bottom: 12px;
+    }
+</style>
+
+@*<div class="top-row px-4">
+    <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="save" Text="登録" Click="@Save" />
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" style="display: inline-block; margin-left: 10px;" Text="削除" Click="@Delete" />
+    <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="閉じる" Click="@Cancel" />
+</div>*@
+
+<div class="top-row" style="padding-left: 0!important;">
+    <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="arrow_back" Click="@Cancel" />
+    <RadzenLabel Text="事業所マスタ" style="margin-right: auto;margin-left: 20px;font-size: 1.5rem" />
+    @*<h3 style="margin-right: auto;margin-left: 20px;">事業所マスタ</h3>*@
+    <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="save" Text="登録" Click="@Save" />
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" style="display: inline-block; margin-left: 10px;" Text="削除" Click="@Delete" />
+</div>
+
+<RadzenTemplateForm Data="@editData">
+    <RadzenFieldset>
+        @if (!string.IsNullOrEmpty(message))
+        {
+            <div class="msg" Style="margin-left: 8px; vertical-align: middle;">
+                @((MarkupString)message)
+            </div>
+            <br />
+        }
+
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="事業所番号" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%; max-width: 120px" @bind-Value="editData.事業所番号" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="事業所名" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%;" @bind-Value="editData.事業所名" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="事業所名カナ" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%;" @bind-Value="editData.事業所名カナ" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="郵便番号" />
+            </div>
+            <div class="col-md-9">
+                <RadzenMask Mask="***-****" CharacterPattern="[0-9]" Placeholder="000-0000" @bind-Value=@editData.郵便番号 Style="width: 100%; max-width: 90px" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="住所" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%;" @bind-Value="editData.住所" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="電話番号" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%; max-width: 150px" @bind-Value="editData.電話番号" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="定員規模" />
+            </div>
+            <div class="col-md-9">
+                <RadzenNumeric Format="#,0" TValue="int?" Style="width: 100%; max-width: 70px" @bind-Value=@editData.定員規模 />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="就労継続A型減免有無" Component="CheckBox1" />
+            </div>
+            <div class="col-md-9">
+                <RadzenCheckBox @bind-Value=@editData.就労継続A型減免有無 Name="CheckBox1" TValue="bool" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="登録日" />
+            </div>
+            <div class="col-md-9">
+                <RadzenDatePicker @bind-Value=@editData.登録日 DateFormat="yyyy/MM/dd" Style="width: 100%; max-width: 150px" />
+            </div>
+        </div>
+        <div class="row">
+            <RadzenDataGrid AllowFiltering="false" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="false" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" @ref="grid"
+                            Data="@editData.M_事業所明細Entities" TItem="M_事業所明細ViewEntity" ColumnWidth="200px" LogicalFilterOperator="LogicalFilterOperator.Or" EmptyText="">
+                <Columns>
+                    <RadzenDataGridColumn Width="60px" TItem="M_事業所明細ViewEntity">
+                        <Template Context="data">
+                            <RadzenButton Variant="Variant.Text" Class="w-100" Icon="delete" ButtonStyle="ButtonStyle.Danger" Click=@(() => DeleteRow(data)) />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn Width="160px" TItem="M_事業所明細ViewEntity" Property="施設名" Title="施設名">
+                        <Template Context="data">
+                            <RadzenTextBox @bind-Value=@data.施設名 Class="w-100" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn Width="100px" TItem="M_事業所明細ViewEntity" Property="種類コード" Title="種類コード">
+                        <Template Context="data">
+                            <RadzenCheckBox @bind-Value=@data.種類コード TValue="bool" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn Width="160px" TItem="M_事業所明細ViewEntity" Property="提供単位番号" Title="提供単位番号">
+                        <Template Context="data">
+                            <RadzenTextBox @bind-Value=@data.サービス提供単位番号 Class="w-100" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn Width="160px" TItem="M_事業所明細ViewEntity" Property="定員" Title="定員">
+                        <Template Context="data">
+                            <RadzenNumeric Format="#,#" TValue="int?" Style="width: 100%; max-width: 70px" @bind-Value=@data.定員 />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn Width="160px" TItem="M_事業所明細ViewEntity" Property="多機能型用件" Title="多機能型用件">
+                        <Template Context="data">
+                            <RadzenDropDown AllowClear="true" TValue="string" Class="w-100" Data=@combo多機能要件 @bind-Value=@data.多機能型用件 TextProperty="Name" ValueProperty="Code" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn Width="160px" TItem="M_事業所明細ViewEntity" Property="単位数単価" Title="単位数単価">
+                        <Template Context="data">
+                            <RadzenNumeric Format="#,#.##" TValue="decimal?" Style="width: 100%; max-width: 90px" @bind-Value=@data.単位数単価 />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn Width="160px" TItem="M_事業所明細ViewEntity" Property="種類区分" Title="種類区分">
+                        <Template Context="data">
+                            <RadzenTextBox @bind-Value=@data.種類区分 Style="width: 100%; max-width: 90px" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenButton Click="@AddRow" Text="行追加" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+            </div>
+        </div>
+
+@*        @if (message != "")
+        {
+            <div class="msg" Style="margin-left: 8px; vertical-align: middle;">
+                @((MarkupString)message)
+            </div>
+            <br />
+        }*@
+        @*        <div class="row justify-content-center">
+        <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top: 0px;">
+        <RadzenButton ButtonStyle="ButtonStyle.Primary" Icon="save" Text="登録" Click="@Save" />
+        <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="閉じる" Click="@Cancel" />
+        </div>
+        </div>*@
+    </RadzenFieldset>
+</RadzenTemplateForm>
