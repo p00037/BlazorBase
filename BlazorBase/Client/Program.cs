@@ -1,7 +1,10 @@
 using BlazorBase.Client;
+using BlazorBase.Client.HttpClients;
+using BlazorBase.Client.Service;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Radzen;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -14,5 +17,10 @@ builder.Services.AddHttpClient("BlazorBase.ServerAPI", client => client.BaseAddr
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorBase.ServerAPI"));
 
 builder.Services.AddApiAuthorization();
+
+builder.Services.AddScoped<IAPIService, APIService>();
+builder.Services.AddScoped<MstOfficeClient>();
+
+builder.Services.AddScoped<NotificationService>();
 
 await builder.Build().RunAsync();

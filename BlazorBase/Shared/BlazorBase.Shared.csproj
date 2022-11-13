@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\MstServiceType\**" />
+    <EmbeddedResource Remove="ViewModels\MstServiceType\**" />
+    <None Remove="ViewModels\MstServiceType\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 </Project>

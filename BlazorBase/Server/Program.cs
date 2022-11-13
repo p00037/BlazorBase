@@ -4,13 +4,25 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using BlazorBase.Infrastructure.Contexts;
+using BlazorBase.Domain.Models;
+using BlazorBase.Domain.Framework;
+using BlazorBase.Infrastructure.Repository;
+using BlazorBase.Infrastructure;
+using BlazorBase.Application.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+var blazorBaseConnectionString = builder.Configuration.GetConnectionString("BlazorBaseContextConnection");
+builder.Services.AddDbContext<BlazorBaseContext>(options => options.UseSqlServer(blazorBaseConnectionString));
+builder.Services.AddScoped<IM_Ž–‹ÆŠRepository, M_Ž–‹ÆŠRepository>();
+builder.Services.AddScoped<IM_Ž–‹ÆŠ–¾×Repository, M_Ž–‹ÆŠ–¾×Repository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<MstOfficeUseCase>();
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
