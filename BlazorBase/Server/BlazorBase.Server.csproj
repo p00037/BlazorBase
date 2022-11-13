@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BlazorBase.Application\BlazorBase.Application.csproj" />
+    <ProjectReference Include="..\..\BlazorBase.Domain\BlazorBase.Domain.csproj" />
+    <ProjectReference Include="..\..\BlazorBase.Infrastructure\BlazorBase.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Library\ExtensionsLibrary\ExtensionsLibrary.csproj" />
     <ProjectReference Include="..\Client\BlazorBase.Client.csproj" />
     <ProjectReference Include="..\Shared\BlazorBase.Shared.csproj" />
   </ItemGroup>
@@ -27,6 +31,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Framework\" />
   </ItemGroup>
 
 </Project>
