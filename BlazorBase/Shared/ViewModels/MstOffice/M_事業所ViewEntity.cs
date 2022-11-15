@@ -2,17 +2,17 @@
 {
     public class M_事業所ViewEntity
     {
-        public string 事業所番号 { get; set; }
+        public string? 事業所番号 { get; set; }
 
-        public string 事業所名 { get; set; }
+        public string? 事業所名 { get; set; }
 
-        public string 事業所名カナ { get; set; }
+        public string? 事業所名カナ { get; set; }
 
-        public string 郵便番号 { get; set; }
+        public string? 郵便番号 { get; set; }
 
-        public string 住所 { get; set; }
+        public string? 住所 { get; set; }
 
-        public string 電話番号 { get; set; }
+        public string? 電話番号 { get; set; }
 
         public int? 定員規模 { get; set; }
 
