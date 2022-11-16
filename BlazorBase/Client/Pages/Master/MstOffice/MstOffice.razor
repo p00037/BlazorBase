@@ -4,18 +4,6 @@
 @using BlazorBase.Shared.ViewModels.MstOffice
 @using BlazorBase.Shared.Entities;
 
-<style>
-    form .row {
-        margin-bottom: 12px;
-    }
-</style>
-
-@*<div class="top-row px-4">
-    <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="save" Text="登録" Click="@Save" />
-    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" style="display: inline-block; margin-left: 10px;" Text="削除" Click="@Delete" />
-    <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="閉じる" Click="@Cancel" />
-</div>*@
-
 <div class="top-row" style="padding-left: 0!important;">
     <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="arrow_back" Click="@Cancel" />
     <RadzenLabel Text="事業所マスタ" style="margin-right: auto;margin-left: 20px;font-size: 1.5rem" />
@@ -159,19 +147,5 @@
                 <RadzenButton Click="@AddRow" Text="行追加" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
             </div>
         </div>
-
-@*        @if (message != "")
-        {
-            <div class="msg" Style="margin-left: 8px; vertical-align: middle;">
-                @((MarkupString)message)
-            </div>
-            <br />
-        }*@
-        @*        <div class="row justify-content-center">
-        <div class="col-md-12 d-flex align-items-end justify-content-center" style="margin-top: 0px;">
-        <RadzenButton ButtonStyle="ButtonStyle.Primary" Icon="save" Text="登録" Click="@Save" />
-        <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="cancel" style="display: inline-block; margin-left: 10px;" Text="閉じる" Click="@Cancel" />
-        </div>
-        </div>*@
     </RadzenFieldset>
 </RadzenTemplateForm>
