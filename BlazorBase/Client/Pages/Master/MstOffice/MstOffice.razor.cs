@@ -27,6 +27,7 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
         [Inject]
         MstOfficeClient MstOfficeClient { get; set; }
 
+        private MstOfficeDisabled disabled = new MstOfficeDisabled(EditMode.新規);
         private List<ComboEntity> combo多機能要件;
         private M_事業所ViewEntity editData = new M_事業所ViewEntity();
         private string message;
@@ -37,12 +38,13 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
             var viewModel = await MstOfficeClient.GetViewModel(OfficeNo);
             editData = viewModel.Data;
             combo多機能要件 = viewModel.Combo多機能要件;
+            disabled = new MstOfficeDisabled(EditMode);
         }
 
         private void AddRow()
         {
             this.editData.M_事業所明細Entities.Add(new M_事業所明細ViewEntity());
-            grid.Reset(true); 
+            grid.Reset(true);
         }
 
         private void DeleteRow(M_事業所明細ViewEntity entity)
@@ -60,8 +62,13 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
                 return;
             }
 
+            this.message = "";
+
             var notificationMessage = new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "登録しました。", Detail = "", Duration = 4000 };
             NotificationService.Notify(notificationMessage);
+
+            EditMode = EditMode.修正;
+            this.disabled = new MstOfficeDisabled(EditMode);
         }
 
         private async Task Delete()
@@ -82,7 +89,6 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
             {
                 EditMode.新規 => await MstOfficeClient.Register(this.editData),
                 EditMode.修正 => await MstOfficeClient.Update(this.editData),
-                EditMode.削除 => await MstOfficeClient.Delete(this.editData),
                 _ => throw new NotImplementedException(),
             };
         }
