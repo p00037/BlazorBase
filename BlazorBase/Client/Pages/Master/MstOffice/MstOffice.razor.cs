@@ -33,7 +33,7 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
         private MstOfficeDisabled disabled = new MstOfficeDisabled(EditMode.新規);
         private List<ComboEntity> combo多機能要件;
         private M_事業所ViewEntity editData = new M_事業所ViewEntity();
-        private string message;
+        private ErrorMessage errorMessage = ErrorMessage.CreateNoError();
         private RadzenDataGrid<M_事業所明細ViewEntity> grid;
 
         protected override async Task OnInitializedAsync()
@@ -61,11 +61,12 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
             RequestResult requestResult = await SaveResult();
             if (!requestResult.IsSuccessful)
             {
-                this.message = requestResult.ErrorMessage;
+                List<string> messages = requestResult.ErrorMessage.Split(Environment.NewLine).ToList();
+                this.errorMessage = ErrorMessage.Create(messages);
                 return;
             }
 
-            this.message = "";
+            this.errorMessage = ErrorMessage.CreateNoError();
 
             var notificationMessage = new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "登録しました。", Detail = "", Duration = 4000 };
             NotificationService.Notify(notificationMessage);
@@ -85,7 +86,8 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
             RequestResult requestResult = await MstOfficeClient.Delete(this.editData);
             if (!requestResult.IsSuccessful)
             {
-                this.message = requestResult.ErrorMessage;
+                List<string> messages = requestResult.ErrorMessage.Split(Environment.NewLine).ToList();
+                this.errorMessage = ErrorMessage.Create(messages);
                 return;
             }
 
