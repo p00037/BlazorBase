@@ -13,12 +13,11 @@
 
 <RadzenTemplateForm Data="@editData">
     <RadzenFieldset>
-        @if (!string.IsNullOrEmpty(message))
+        @if (errorMessage.IsError)
         {
-            <div class="msg" Style="margin-left: 8px; vertical-align: middle;">
-                @((MarkupString)message)
+            <div class="msg" Style="margin-left: 0px; vertical-align: middle;">
+                @((MarkupString)errorMessage.HtmlCode)
             </div>
-            <br />
         }
 
         <div class="row">

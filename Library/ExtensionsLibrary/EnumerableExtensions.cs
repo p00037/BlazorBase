@@ -37,16 +37,6 @@ namespace ExtensionsLibrary
             return string.Join(separator, source);
         }
 
-        /// <summary>
-        /// 文字列を結合する(Htmlの箇条書きにする）
-        /// </summary>
-        /// <param name="source">拡張メソッド本体の値</param>
-        /// <returns>結合した文字</returns>
-        public static string ConcatWithHtmlItemize(this IEnumerable<string> source)
-        {
-            return "<ul><li>" + string.Join("</li><li>", source) + "</li></ul>";
-        }
-
         public static DataTable ConvertDataTable<T>(this IEnumerable<T> items)
         {
             var properties = typeof(T).GetProperties();
