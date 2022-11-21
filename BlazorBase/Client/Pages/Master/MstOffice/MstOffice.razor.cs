@@ -25,6 +25,9 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
         NotificationService NotificationService { get; set; }
 
         [Inject]
+        DialogService DialogService { get; set; }
+
+        [Inject]
         MstOfficeClient MstOfficeClient { get; set; }
 
         private MstOfficeDisabled disabled = new MstOfficeDisabled(EditMode.新規);
@@ -73,6 +76,12 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
 
         private async Task Delete()
         {
+            var result = await DialogService.Confirm("削除してよろしいですか？", "確認メッセージ", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+            if(!result.HasValue || !result.Value)
+            {
+                return;
+            }
+
             RequestResult requestResult = await MstOfficeClient.Delete(this.editData);
             if (!requestResult.IsSuccessful)
             {

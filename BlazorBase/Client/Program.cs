@@ -22,5 +22,6 @@ builder.Services.AddScoped<IAPIService, APIService>();
 builder.Services.AddScoped<MstOfficeClient>();
 
 builder.Services.AddScoped<NotificationService>();
+builder.Services.AddSingleton<DialogService>();
 
 await builder.Build().RunAsync();
