@@ -4,7 +4,7 @@ using Radzen.Blazor;
 
 namespace BlazorBase.Client.Pages
 {
-    public partial class UploadTestPage
+    public partial class UploadTestPage : ComponentBase
     {
         void OnProgress(UploadProgressArgs args, string name)
         {

@@ -26,7 +26,7 @@ namespace BlazorBase.Client.Service
         public async Task<T> PostRequest<T>(string serviceName, object postObject)
         {
             string jsonString = JsonConvert.SerializeObject(postObject);
-            var requestUri = $"{httpClient.BaseAddress.ToString()}{serviceName}";
+            var requestUri = $"{httpClient.BaseAddress}{serviceName}";
             var requestMessage = new HttpRequestMessage()
             {
                 Method = new HttpMethod("POST"),
@@ -91,7 +91,7 @@ namespace BlazorBase.Client.Service
         public async Task<T> DeleteRequest<T>(string serviceName, object postObject)
         {
             string jsonString = JsonConvert.SerializeObject(postObject);
-            var requestUri = $"{httpClient.BaseAddress.ToString()}{serviceName}";
+            var requestUri = $"{httpClient.BaseAddress}{serviceName}";
             var requestMessage = new HttpRequestMessage()
             {
                 Method = new HttpMethod("DELETE"),
@@ -118,6 +118,24 @@ namespace BlazorBase.Client.Service
             requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
             requestMessage.SetBrowserRequestCache(BrowserRequestCache.NoCache);
             var response = await httpClient.SendAsync(requestMessage);
+        }
+
+        public async Task<Stream> DownloadFile(string requestUri)
+        {
+            // validation
+            //var fileInfo = new FileInfo($"test.txt");
+            var response = await httpClient.GetAsync(requestUri);
+            response.EnsureSuccessStatusCode();
+            await using var sm = await response.Content.ReadAsStreamAsync();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                sm.CopyTo(ms);
+                return new MemoryStream(ms.ToArray());
+            }
+
+            //await using var fs = File.Create(fileInfo.FullName);
+
+            //return fileInfo.FullName;
         }
 
         private async Task<T> CheckException<T>(HttpResponseMessage response)
