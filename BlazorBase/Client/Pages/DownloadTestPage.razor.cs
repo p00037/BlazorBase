@@ -12,17 +12,8 @@ namespace BlazorBase.Client.Pages
         [Inject]
         DownloadTestClient DownloadTestClient { get; set; }
 
-        private Stream GetFileStream()
-        {
-            var randomBinaryData = new byte[50 * 1024];
-            var fileStream = new MemoryStream(randomBinaryData);
-
-            return fileStream;
-        }
-
         private async Task DownloadFileFromStream()
         {
-            //var fileStream = GetFileStream();
             var fileStream = await DownloadTestClient.Download();
             var fileName = "text1.txt";
 
