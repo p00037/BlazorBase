@@ -20,6 +20,7 @@ builder.Services.AddApiAuthorization();
 
 builder.Services.AddScoped<IAPIService, APIService>();
 builder.Services.AddScoped<MstOfficeClient>();
+builder.Services.AddScoped<DownloadTestClient>();
 
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddSingleton<DialogService>();

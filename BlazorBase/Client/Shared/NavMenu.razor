@@ -54,7 +54,12 @@
             <ul class="nav flex-column">
                 <li class="nav-item px-3" style="height:auto">
                     <NavLink class="nav-link" style="height:20px" href="UploadTestPage">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> アップロード
+                        <span class="oi oi-data-transfer-upload" aria-hidden="true"></span> アップロード
+                    </NavLink>
+                </li>
+                <li class="nav-item px-3" style="height:auto">
+                    <NavLink class="nav-link" style="height:20px" href="DownloadTestPage">
+                        <span class="oi oi-data-transfer-download" aria-hidden="true"></span> ダウンロード
                     </NavLink>
                 </li>
             </ul>
@@ -68,7 +73,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item px-3" style="height:auto">
                             <NavLink class="nav-link" style="height:20px" @onclick="BeginSignOut">
-                                <span class="oi oi-list-rich" aria-hidden="true"></span> ログアウト
+                                <span class="oi oi-account-logout" aria-hidden="true"></span> ログアウト
                             </NavLink>
                         </li>
                     </ul>
@@ -77,12 +82,12 @@
                     <ul class="nav flex-column">
                         <li class="nav-item px-3" style="height:auto">
                             <NavLink class="nav-link" style="height:20px" href="authentication/register">
-                                <span class="oi oi-list-rich" aria-hidden="true"></span> 登録
+                                <span class="oi oi-person" aria-hidden="true"></span> 登録
                             </NavLink>
                         </li>
                         <li class="nav-item px-3" style="height:auto">
                             <NavLink class="nav-link" style="height:20px" href="authentication/login">
-                                <span class="oi oi-list-rich" aria-hidden="true"></span> ログイン
+                                <span class="oi oi-account-login" aria-hidden="true"></span> ログイン
                             </NavLink>
                         </li>
                     </ul>
