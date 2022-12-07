@@ -4,7 +4,8 @@
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
 
-<div class="top-row ps-3 navbar navbar-dark">
+@*<div class="top-row ps-3 navbar navbar-dark">*@
+<div class="top-row ps-3  navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">BlazorBase</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -13,28 +14,13 @@
     </div>
 </div>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
+<div class="@NavMenuCssClass rz-background-color-base-100" @onclick="ToggleNavMenu">
+@*    <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        @*        <div class="nav-item px-3">
-        <NavLink class="nav-link" href="counter">
-        <span class="oi oi-plus" aria-hidden="true"></span> Counter
-        </NavLink>
-        </div>
-        <div class="nav-item px-3">
-        <NavLink class="nav-link" href="fetchdata">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-        </NavLink>
-        </div>
-        <div class="nav-item px-3">
-        <NavLink class="nav-link" href="MstOfficeListPage">
-        <span class="oi oi-list-rich" aria-hidden="true"></span> 事業所マスタ
-        </NavLink>
-        </div>*@
 
         <div class="nav-item px-3" style="color:white">
             <span class="oi oi-chevron-right"></span> マスタ
@@ -94,7 +80,29 @@
                 </NotAuthorized>
             </AuthorizeView>
         </div>
-    </nav>
+    </nav>*@
+    <RadzenPanelMenu Style="width:270px">
+        <RadzenPanelMenuItem Text="ホーム" Icon="home" Path="/"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="マスタ" Icon="view_list">
+            <RadzenPanelMenuItem Text="事業所マスタ" Path="MstOfficeListPage"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="ファイル操作" Icon="description">
+            <RadzenPanelMenuItem Text="アップロード" Path="UploadTestPage"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="ダウンロード" Path="DownloadTestPage"></RadzenPanelMenuItem>
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="アカウント" Icon="account_box">
+            <AuthorizeView>
+                <Authorized>
+                    <RadzenPanelMenuItem Text="ログアウト" Path="LogoutPage"></RadzenPanelMenuItem>
+                </Authorized>
+                <NotAuthorized>
+                    <RadzenPanelMenuItem Text="登録" Path="authentication/register"></RadzenPanelMenuItem>
+                    <RadzenPanelMenuItem Text="ログイン" Path="authentication/login"></RadzenPanelMenuItem>
+                </NotAuthorized>
+            </AuthorizeView>
+        </RadzenPanelMenuItem>
+    </RadzenPanelMenu>
+
 </div>
 
 @code {

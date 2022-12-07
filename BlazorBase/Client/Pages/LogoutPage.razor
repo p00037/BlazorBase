@@ -1,0 +1,24 @@
+﻿@page "/LogoutPage"
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<h3>LogoutPage</h3>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await SignOutManager.SetSignOutState();
+            Navigation.NavigateTo("authentication/logout");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+}
