@@ -4,7 +4,6 @@
 @inject NavigationManager Navigation
 @inject SignOutSessionStateManager SignOutManager
 
-@*<div class="top-row ps-3 navbar navbar-dark">*@
 <div class="top-row ps-3  navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">BlazorBase</a>
@@ -15,74 +14,8 @@
 </div>
 
 <div class="@NavMenuCssClass rz-background-color-base-100" @onclick="ToggleNavMenu">
-@*    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3" style="color:white">
-            <span class="oi oi-chevron-right"></span> マスタ
-
-            <ul class="nav flex-column">
-                <li class="nav-item px-3" style="height:auto">
-                    <NavLink class="nav-link" style="height:20px" href="MstOfficeListPage">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> 事業所マスタ
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-item px-3" style="color:white">
-            <span class="oi oi-chevron-right"></span> ファイル
-
-            <ul class="nav flex-column">
-                <li class="nav-item px-3" style="height:auto">
-                    <NavLink class="nav-link" style="height:20px" href="UploadTestPage">
-                        <span class="oi oi-data-transfer-upload" aria-hidden="true"></span> アップロード
-                    </NavLink>
-                </li>
-                <li class="nav-item px-3" style="height:auto">
-                    <NavLink class="nav-link" style="height:20px" href="DownloadTestPage">
-                        <span class="oi oi-data-transfer-download" aria-hidden="true"></span> ダウンロード
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
-
-        <div class="nav-item px-3" style="color:white">
-            <span class="oi oi-chevron-right"></span> アカウント
-
-            <AuthorizeView>
-                <Authorized>
-                    <ul class="nav flex-column">
-                        <li class="nav-item px-3" style="height:auto">
-                            <NavLink class="nav-link" style="height:20px" @onclick="BeginSignOut">
-                                <span class="oi oi-account-logout" aria-hidden="true"></span> ログアウト
-                            </NavLink>
-                        </li>
-                    </ul>
-                </Authorized>
-                <NotAuthorized>
-                    <ul class="nav flex-column">
-                        <li class="nav-item px-3" style="height:auto">
-                            <NavLink class="nav-link" style="height:20px" href="authentication/register">
-                                <span class="oi oi-person" aria-hidden="true"></span> 登録
-                            </NavLink>
-                        </li>
-                        <li class="nav-item px-3" style="height:auto">
-                            <NavLink class="nav-link" style="height:20px" href="authentication/login">
-                                <span class="oi oi-account-login" aria-hidden="true"></span> ログイン
-                            </NavLink>
-                        </li>
-                    </ul>
-                </NotAuthorized>
-            </AuthorizeView>
-        </div>
-    </nav>*@
     <RadzenPanelMenu Style="width:270px">
-        <RadzenPanelMenuItem Text="ホーム" Icon="home" Path="/"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="トップページ" Icon="home" Path="/"></RadzenPanelMenuItem>
         <RadzenPanelMenuItem Text="マスタ" Icon="view_list">
             <RadzenPanelMenuItem Text="事業所マスタ" Path="MstOfficeListPage"></RadzenPanelMenuItem>
         </RadzenPanelMenuItem>

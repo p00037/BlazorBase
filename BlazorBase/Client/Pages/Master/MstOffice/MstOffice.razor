@@ -8,7 +8,7 @@
     <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="arrow_back" Click="@Cancel" />
     <RadzenLabel Text="事業所マスタ" style="margin-right: auto;margin-left: 20px;font-size: 1.5rem" />
     <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="save" Text="登録" Click="@Save" />
-    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" style="display: inline-block; margin-left: 10px;" Text="削除" Click="@Delete" Disabled="@disabled.BtnDelete"/>
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" style="display: inline-block; margin-left: 10px;" Click="@Delete" Disabled="@disabled.BtnDelete"/>
 </div>
 
 <RadzenTemplateForm Data="@editData">
