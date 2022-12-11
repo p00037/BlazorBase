@@ -112,9 +112,9 @@ main {
         }
 
 @media (max-width: 640.98px) {
-    .top-row:not(.auth) {
+/*    .top-row:not(.auth) {
         display: none;
-    }
+    }*/
 
     .top-row.auth {
         justify-content: space-between;
@@ -126,9 +126,9 @@ main {
 }
 
 @media (min-width: 641px) {
-    .page {
+    /*.page {
         flex-direction: row;
-    }
+    }*/
 
     /*    .sidebar {
         width: 250px;

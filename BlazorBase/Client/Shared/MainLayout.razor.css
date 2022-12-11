@@ -1,3 +1,7 @@
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 .page {
     position: relative;
     display: flex;
@@ -14,7 +18,7 @@ main {
 }
 
 .top-row {
-    background-color: lightgrey;
+    background-color: whitesmoke;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
     height: 3.5rem;
@@ -38,7 +42,11 @@ main {
     }
 
 @media (max-width: 640.98px) {
-    .top-row:not(.auth) {
+/*    .top-row:not(.auth) {
+        display: none;
+    }*/
+
+    .top-row {
         display: none;
     }
 
