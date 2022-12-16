@@ -43,6 +43,13 @@
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    protected override void OnInitialized()
+    {
+        // Subscribe to the event
+        Navigation.LocationChanged += LocationChanged;
+        base.OnInitialized();
+    }
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
@@ -52,5 +59,11 @@
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
+    }
+
+    void LocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        this.collapseNavMenu = true;
+        StateHasChanged();
     }
 }
