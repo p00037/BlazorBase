@@ -19,6 +19,7 @@ namespace BlazorBase.Client.Service
         public async Task<T> GetRequest<T>(string requestUri)
         {
             var response = await httpClient.GetAsync(requestUri);
+
             return await CheckException<T>(response);
         }
 
