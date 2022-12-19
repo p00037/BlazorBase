@@ -68,4 +68,18 @@ app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
+//データベースの更新
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    using BlazorBaseContext context = scope.ServiceProvider.GetRequiredService<BlazorBaseContext>();
+    context.Database.Migrate();
+}
+
+//データベースの更新
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    using ApplicationDbContext context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
+}
+
 app.Run();
