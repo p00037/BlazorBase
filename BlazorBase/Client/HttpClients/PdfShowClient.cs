@@ -7,9 +7,10 @@ namespace BlazorBase.Client.HttpClients
     {
         private readonly IAPIService _apiService;
 
-        public PdfShowClient(IAPIService apiService)
+        public PdfShowClient(HttpClient httpClient)
         {
-            _apiService = apiService;
+            HttpClient allowAnonymousHttpClient = new HttpClient() { BaseAddress = httpClient.BaseAddress};
+            _apiService = new APIService(allowAnonymousHttpClient);
         }
 
         public async Task<PrintResult> Get()
