@@ -3,7 +3,7 @@ using BlazorBase.Shared.ViewModels.MstOffice;
 
 namespace BlazorBase.Server.Converter
 {
-    public class M_事業所Converter
+    public class M_事業所Convertor
     {
         public static M_事業所ViewEntity ConvertView(M_事業所Entity domainEntity)
         {

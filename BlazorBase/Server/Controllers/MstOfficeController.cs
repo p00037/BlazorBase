@@ -28,7 +28,7 @@ namespace BlazorBase.Server.Controllers
 
             return new MstOfficeViewModel()
             {
-                Data = M_事業所Converter.ConvertView(entity),
+                Data = M_事業所Convertor.ConvertView(entity),
                 Combo多機能要件 = GetCombo多機能要件()
             };
         }
@@ -58,7 +58,7 @@ namespace BlazorBase.Server.Controllers
         {
             return Excute(() =>
             {
-                var domainEntity = M_事業所Converter.ConvertDomain(value);
+                var domainEntity = M_事業所Convertor.ConvertDomain(value);
                 _useCase.Update(domainEntity);
             });
         }
@@ -68,7 +68,7 @@ namespace BlazorBase.Server.Controllers
         {
             return Excute(() =>
             {
-                var domainEntity = M_事業所Converter.ConvertDomain(value);
+                var domainEntity = M_事業所Convertor.ConvertDomain(value);
                 _useCase.Register(domainEntity);
             });
         }
@@ -78,7 +78,7 @@ namespace BlazorBase.Server.Controllers
         {
             return Excute(() =>
             {
-                var domainEntity = M_事業所Converter.ConvertDomain(value);
+                var domainEntity = M_事業所Convertor.ConvertDomain(value);
                 _useCase.Delete(domainEntity);
             });
         }

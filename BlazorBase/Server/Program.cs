@@ -20,8 +20,10 @@ var blazorBaseConnectionString = builder.Configuration.GetConnectionString("Blaz
 builder.Services.AddDbContext<BlazorBaseContext>(options => options.UseSqlServer(blazorBaseConnectionString));
 builder.Services.AddScoped<IM_事業所Repository, M_事業所Repository>();
 builder.Services.AddScoped<IM_事業所明細Repository, M_事業所明細Repository>();
+builder.Services.AddScoped<IM_ログインユーザーRepository, M_ログインユーザーRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<MstOfficeUseCase>();
+builder.Services.AddScoped<MstLoginUserUseCase>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

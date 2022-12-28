@@ -3,7 +3,7 @@ using BlazorBase.Shared.ViewModels.MstOffice;
 
 namespace BlazorBase.Server.Converter
 {
-    class MstOfficeSearchConverter
+    class MstOfficeSearchConvertor
     {
         public static MstOfficeSearchEntity ConvertDomain(MstOfficeSearchViewEntity viewEntity)
         {

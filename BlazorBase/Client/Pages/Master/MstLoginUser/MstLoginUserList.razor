@@ -1,0 +1,61 @@
+﻿@page "/MstLoginUserList"
+@using BlazorBase.Shared.ViewModels.MstLoginUser
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+<PageTitle>ログインユーザー一覧</PageTitle>
+
+@if (searchResultEntities == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="top-row" style="padding-left: 0!important;">
+        <RadzenLabel Text="ログインユーザー一覧" style="margin-right: auto;font-size: 1.5rem" />
+        <RadzenButton Click="@CreateNew" Icon="add" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+    </div>
+
+    <RadzenTemplateForm Data="@searchEntity">
+        <RadzenFieldset>
+
+            <div class="row">
+                <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                    <RadzenLabel Text="ユーザー名" />
+                </div>
+                <div class="col-md-9">
+                    <RadzenTextBox Style="width: 100%; max-width: 120px" @bind-Value="searchEntity.UserName" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                    <RadzenLabel Text="表示名" />
+                </div>
+                <div class="col-md-9">
+                    <RadzenTextBox Style="width: 100%;" @bind-Value="searchEntity.DisplayName" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                    <RadzenButton Style="width: 100%; max-width: 120px" ButtonStyle="ButtonStyle.Secondary" Text="検索" Click="@SearchAsync" />
+                </div>
+            </div>
+
+            <div class="row">
+                <RadzenDataGrid AllowFiltering="false" AllowColumnResize="true" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true" @ref="grid"
+                            Data="@searchResultEntities" TItem="M_ログインユーザーViewEntity" ColumnWidth="200px" LogicalFilterOperator="LogicalFilterOperator.Or">
+                    <Columns>
+                        <RadzenDataGridColumn Width="60px" TItem="M_ログインユーザーViewEntity" Frozen="true" Sortable="false">
+                            <Template Context="data">
+                                <RadzenLink Path="@GetUpdateURL(@data.UserName)" Text="編集" Icon="edit"/>
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="M_ログインユーザーViewEntity" Property="UserName" Title="ユーザー名" Frozen="true" Width="200px" />
+                        <RadzenDataGridColumn TItem="M_ログインユーザーViewEntity" Property="DisplayName" Title="表示名" Width="200px" />
+                    </Columns>
+                </RadzenDataGrid>
+            </div>
+        </RadzenFieldset>
+    </RadzenTemplateForm>
+}
