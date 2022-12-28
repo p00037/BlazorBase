@@ -23,9 +23,9 @@ namespace BlazorBase.Server.Controllers
         [HttpPost]
         public IEnumerable<M_事業所ViewEntity> Post([FromBody] MstOfficeSearchViewEntity value)
         {
-            MstOfficeSearchEntity searchEntity = MstOfficeSearchConverter.ConvertDomain(value);
+            MstOfficeSearchEntity searchEntity = MstOfficeSearchConvertor.ConvertDomain(value);
             IEnumerable<M_事業所Entity> domainEntities = _useCase.GetList(searchEntity);
-            return M_事業所Converter.ConvertView(domainEntities);
+            return M_事業所Convertor.ConvertView(domainEntities);
         }
     }
 }

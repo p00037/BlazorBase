@@ -23,6 +23,7 @@ builder.Services.AddScoped<MstOfficeClient>();
 builder.Services.AddScoped<DownloadTestClient>();
 builder.Services.AddScoped<PdfShowClient>();
 builder.Services.AddScoped<AccountClient>();
+builder.Services.AddScoped<MstLoginUserClient>();
 
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddSingleton<DialogService>();

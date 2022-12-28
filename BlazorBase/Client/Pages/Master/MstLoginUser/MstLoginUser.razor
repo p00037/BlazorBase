@@ -1,11 +1,47 @@
 ﻿@page "/MstLoginUser"
+@page "/MstLoginUser/{UserName}"
+@using BlazorBase.Shared.ViewModels.MstLoginUser
+@using BlazorBase.Shared.Entities;
 
-<h3>LoginTest</h3>
+<div class="top-row" style="padding-left: 0!important;">
+    <RadzenButton ButtonStyle="ButtonStyle.Light" Icon="arrow_back" Click="@Cancel" />
+    <RadzenLabel Text="ログインユーザーマスタ" style="margin-right: auto;margin-left: 20px;font-size: 1.5rem" />
+    <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="save" Text="登録" Click="@Save" />
+    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" style="display: inline-block; margin-left: 10px;" Click="@Delete" Disabled="@disabled.BtnDelete"/>
+</div>
 
-<RadzenButton Style="w-100" ButtonStyle="ButtonStyle.Secondary" Text="登録" Click="@Register" />
-<br/>
-<br/>
-<RadzenButton Style="w-100" ButtonStyle="ButtonStyle.Secondary" Text="削除" Click="@Delete" />
-<br/>
-<br/>
-<RadzenButton Style="w-100" ButtonStyle="ButtonStyle.Secondary" Text="パスワード変更" Click="@UpdatePassword" />
+<RadzenTemplateForm Data="@editData">
+    <RadzenFieldset>
+        @if (errorMessage.IsError)
+        {
+            <div class="msg" Style="margin-left: 0px; vertical-align: middle;">
+                @((MarkupString)errorMessage.HtmlCode)
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="ユーザー名" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%; max-width: 120px" @bind-Value="editData.UserName" Disabled="@disabled.PrimaryKey"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="表示名" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%; max-width: 120px" @bind-Value="editData.DisplayName" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 align-items-center d-flex" style="max-width: 200px">
+                <RadzenLabel Text="パスワード" />
+            </div>
+            <div class="col-md-9">
+                <RadzenTextBox Style="width: 100%; max-width: 120px" @bind-Value="editData.Password" />
+            </div>
+        </div>
+    </RadzenFieldset>
+</RadzenTemplateForm>
