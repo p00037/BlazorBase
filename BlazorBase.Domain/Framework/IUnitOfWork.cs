@@ -11,5 +11,7 @@ namespace BlazorBase.Domain.Framework
         void Rollback();
 
         void Save(Action action);
+
+        Task SaveAsync(Func<Task> func);
     }
 }

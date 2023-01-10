@@ -25,6 +25,7 @@ namespace BlazorBase.Server.Convertor
             {
                 UserName = viewEntity.UserName,
                 DisplayName = viewEntity.DisplayName,
+                Password = viewEntity.Password
             };
         }
 
