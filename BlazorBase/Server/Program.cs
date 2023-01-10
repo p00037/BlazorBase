@@ -10,6 +10,8 @@ using BlazorBase.Domain.Framework;
 using BlazorBase.Infrastructure.Repository;
 using BlazorBase.Infrastructure;
 using BlazorBase.Application.UseCases;
+using BlazorBase.Domain.Models.LoginUser;
+using BlazorBase.Server.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +20,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 var blazorBaseConnectionString = builder.Configuration.GetConnectionString("BlazorBaseContextConnection");
 builder.Services.AddDbContext<BlazorBaseContext>(options => options.UseSqlServer(blazorBaseConnectionString));
+
 builder.Services.AddScoped<IM_事業所Repository, M_事業所Repository>();
 builder.Services.AddScoped<IM_事業所明細Repository, M_事業所明細Repository>();
 builder.Services.AddScoped<IM_ログインユーザーRepository, M_ログインユーザーRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddScoped<MstOfficeUseCase>();
+builder.Services.AddScoped<IIdentityUserManager, IdentityUserManager>();
 builder.Services.AddScoped<MstLoginUserUseCase>();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

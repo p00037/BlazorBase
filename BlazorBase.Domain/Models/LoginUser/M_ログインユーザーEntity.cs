@@ -23,5 +23,9 @@ namespace BlazorBase.Domain.Models
         [StringLength(50, ErrorMessage = ComValidationMessage.StringLength)]
         public string DisplayName { get; set; }
 
+        [Display(Name = "パスワード")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!-/:-@[-`{-~])[!-~]+$", ErrorMessage = "{0}には半角英小文字大文字数字記号を1文字以上が必要です")]
+        [StringLength(50, ErrorMessage = "{0} は{2}～{1}の文字数を設定してください", MinimumLength = 6)]
+        public string Password { get; set; }
     }
 }

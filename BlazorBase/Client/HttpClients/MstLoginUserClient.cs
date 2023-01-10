@@ -14,9 +14,9 @@ namespace BlazorBase.Client.HttpClients
             _apiService = new APIService(allowAnonymousHttpClient);
         }
 
-        public async Task<MstLoginUserViewModel> GetViewModel(string officeNo)
+        public async Task<MstLoginUserViewModel> GetViewModel(string userName)
         {
-            return await _apiService.GetRequest<MstLoginUserViewModel>($"api/MstLoginUser?officeNo={officeNo}");
+            return await _apiService.GetRequest<MstLoginUserViewModel>($"api/MstLoginUser?userName={userName}");
         }
 
         public async Task<List<M_ログインユーザーViewEntity>> GetList(MstLoginUserSearchViewEntity search)

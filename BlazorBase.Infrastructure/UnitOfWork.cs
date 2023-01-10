@@ -47,6 +47,21 @@ namespace BlazorBase.Infrastructure
             }
         }
 
+        public async Task SaveAsync(Func<Task> func)
+        {
+            try
+            {
+                Begin();
+                await func();
+                Commit();
+            }
+            catch
+            {
+                Rollback();
+                throw;
+            }
+        }
+
         public void Dispose()
         {
             if (transaction == null) return;

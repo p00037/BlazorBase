@@ -6,6 +6,7 @@ using BlazorBase.Domain.Exceptions;
 using BlazorBase.Domain.Models;
 using BlazorBase.Domain.Framework;
 using BlazorBase.Domain.Services;
+using BlazorBase.Domain.Models.LoginUser;
 
 namespace BlazorBase.Application.UseCases
 {
@@ -13,11 +14,13 @@ namespace BlazorBase.Application.UseCases
     {
         IUnitOfWork unitOfWork;
         IM_ログインユーザーRepository m_ログインユーザーRepository;
+        IIdentityUserManager identityUserManager;
 
-        public MstLoginUserUseCase(IUnitOfWork unitOfWork, IM_ログインユーザーRepository m_ログインユーザーRepository)
+        public MstLoginUserUseCase(IUnitOfWork unitOfWork, IM_ログインユーザーRepository m_ログインユーザーRepository, IIdentityUserManager identityUserManager)
         {
-            this.m_ログインユーザーRepository = m_ログインユーザーRepository;
             this.unitOfWork = unitOfWork;
+            this.m_ログインユーザーRepository = m_ログインユーザーRepository;          
+            this.identityUserManager = identityUserManager;
         }
 
         public M_ログインユーザーEntity New()
@@ -38,7 +41,7 @@ namespace BlazorBase.Application.UseCases
             return this.m_ログインユーザーRepository.GetList(searchEntity);
         }
 
-        public void Register(M_ログインユーザーEntity entity)
+        public async Task RegisterAsync(M_ログインユーザーEntity entity)
         {
             var validation = new MstLoginUserValidation(entity, new M_ログインユーザーService(m_ログインユーザーRepository), true);
             if (validation.IsError(out string message))
@@ -46,13 +49,14 @@ namespace BlazorBase.Application.UseCases
                 throw new SaveErrorExcenption(message);
             }
 
-            unitOfWork.Save(() =>
+            await unitOfWork.SaveAsync(async () =>
             {
+                await this.identityUserManager.CreateAsync(entity);
                 this.m_ログインユーザーRepository.Add(entity);
             });
         }
 
-        public void Update(M_ログインユーザーEntity entity)
+        public async Task UpdateAsync(M_ログインユーザーEntity entity)
         {
             var validation = new MstLoginUserValidation(entity, new M_ログインユーザーService(m_ログインユーザーRepository), false);
             if (validation.IsError(out string message))
@@ -60,16 +64,18 @@ namespace BlazorBase.Application.UseCases
                 throw new SaveErrorExcenption(message);
             }
 
-            unitOfWork.Save(() =>
+            await unitOfWork.SaveAsync(async () =>
             {
+                await this.identityUserManager.UpdateAsync(entity);
                 this.m_ログインユーザーRepository.Update(entity);
             });
         }
 
-        public void Delete(M_ログインユーザーEntity entity)
+        public async Task DeleteAsync(M_ログインユーザーEntity entity)
         {
-            unitOfWork.Save(() =>
+            await unitOfWork.SaveAsync(async () =>
             {
+                await this.identityUserManager.DeleteAsync(entity);
                 this.m_ログインユーザーRepository.Remove(entity);
             });
         }
