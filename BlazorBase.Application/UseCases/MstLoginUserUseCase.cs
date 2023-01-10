@@ -41,20 +41,6 @@ namespace BlazorBase.Application.UseCases
             return this.m_ログインユーザーRepository.GetList(searchEntity);
         }
 
-        public void Register(M_ログインユーザーEntity entity)
-        {
-            var validation = new MstLoginUserValidation(entity, new M_ログインユーザーService(m_ログインユーザーRepository), true);
-            if (validation.IsError(out string message))
-            {
-                throw new SaveErrorExcenption(message);
-            }
-
-            unitOfWork.Save(() =>
-            {
-                this.m_ログインユーザーRepository.Add(entity);
-            });
-        }
-
         public async Task RegisterAsync(M_ログインユーザーEntity entity)
         {
             var validation = new MstLoginUserValidation(entity, new M_ログインユーザーService(m_ログインユーザーRepository), true);
