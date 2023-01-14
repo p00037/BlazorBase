@@ -20,7 +20,33 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <ErrorBoundary @ref="_errorBoundary">
+                <ChildContent>
+                    @Body
+                </ChildContent>
+                <ErrorContent>
+                    <div class="alert alert-danger col-md-12" role="alert">
+                        <p>【ErrorMessage】<br /><RadzenLabel class="col-md-12" Text="@context.Message" /></p>
+                        <p>【StackTrace】<br /><RadzenLabel  class="col-md-12" Text="@context.StackTrace" /></p>
+
+                        <div>
+                            @* ボタンを押したらエラーからリカバリーする *@
+                            <RadzenButton Click="() => _errorBoundary?.Recover()" Text="OK" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+                        </div>
+                    </div>
+                </ErrorContent>
+            </ErrorBoundary>
         </article>
     </main>
 </div>
+
+@code {
+    // @ref でコンポーネントをフィールドに保持
+    private ErrorBoundary? _errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        // OnParametersSet のタイミングでエラーからリカバリー
+        _errorBoundary?.Recover();
+    }
+}
