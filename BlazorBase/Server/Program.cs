@@ -11,7 +11,7 @@ using BlazorBase.Infrastructure.Repository;
 using BlazorBase.Infrastructure;
 using BlazorBase.Application.UseCases;
 using BlazorBase.Domain.Models.LoginUser;
-using BlazorBase.Server.Controllers;
+using BlazorBase.Server.Areas.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 

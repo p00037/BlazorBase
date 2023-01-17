@@ -13,7 +13,7 @@ namespace BlazorBase.Client.HttpClients
 
         public async Task<Stream> Download()
         {
-            return await this.apiService.DownloadFile($"download/test");
+            return await this.apiService.DownloadFile($"api/download/test");
         }
     }
 }

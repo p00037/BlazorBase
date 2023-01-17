@@ -4,7 +4,6 @@
 
 namespace BlazorBase.Server.Controllers
 {
-    //[Route("api/[controller]")]
     [ApiController]
     public class FileDownloadController : ControllerBase
     {
@@ -15,7 +14,7 @@ namespace BlazorBase.Server.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpGet("download/test")]
+        [HttpGet("api/download/test")]
         public IActionResult Download()
         {
             var fileName = "text1.txt";

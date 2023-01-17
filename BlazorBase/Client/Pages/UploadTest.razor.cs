@@ -7,7 +7,7 @@ using BlazorBase.Shared.ViewModels.UploadTest;
 
 namespace BlazorBase.Client.Pages
 {
-    public partial class UploadTestPage : ComponentBase
+    public partial class UploadTest : ComponentBase
     {
         [Inject]
         UploadTestClient UploadTestClient { get; set; }
@@ -40,7 +40,7 @@ namespace BlazorBase.Client.Pages
             }
 
             this.uploadId = Guid.NewGuid().ToString();
-            upload.Url = $"upload/multiple/{this.uploadId}";
+            upload.Url = $"api/upload/multiple/{this.uploadId}";
             await upload.Upload();
         }
 
@@ -55,7 +55,7 @@ namespace BlazorBase.Client.Pages
             }
 
             var uploadId = Guid.NewGuid().ToString();
-            upload.Url = $"upload/multiple/{uploadId}";
+            upload.Url = $"api/upload/multiple/{uploadId}";
             await upload.Upload();
         }
 

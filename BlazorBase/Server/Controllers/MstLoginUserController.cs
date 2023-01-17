@@ -10,7 +10,7 @@ namespace BlazorBase.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MstLoginUserController : Framework.ControllerBase
+    public class MstLoginUserController : ControllerBase
     {
         private readonly MstLoginUserUseCase useCase;
         private readonly ILogger<RegisterModel> _logger;

@@ -31,7 +31,12 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
 
         private void CreateNew()
         {
-            NavManager.NavigateTo($"MstOfficePage/{(int)EditMode.新規}");
+            NavManager.NavigateTo($"MstOffice");
+        }
+
+        private string GetUpdateURL(string officeNo)
+        {
+            return $"MstOffice/{officeNo}";
         }
     }
 }

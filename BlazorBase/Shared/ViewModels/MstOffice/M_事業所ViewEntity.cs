@@ -21,7 +21,5 @@
         public DateTime? 登録日 { get; set; }
 
         public List<M_事業所明細ViewEntity> M_事業所明細Entities { get; set; } = new List<M_事業所明細ViewEntity>();
-
-        public string Url => $"MstOfficePage/1/{事業所番号}";
     }
 }

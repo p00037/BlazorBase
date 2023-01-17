@@ -16,7 +16,7 @@ namespace BlazorBase.Client.HttpClients
 
         public async Task<RequestResult> CheckFile(UploadEntity entity)
         {
-            return await this.apiService.PostRequest<RequestResult>($"upload/filecheck", entity);
+            return await this.apiService.PostRequest<RequestResult>($"api/upload/filecheck", entity);
         }
     }
 }

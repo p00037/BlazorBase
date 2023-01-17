@@ -13,9 +13,6 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
     public partial class MstOffice : ComponentBase
     {
         [Parameter]
-        public EditMode EditMode { get; set; }
-
-        [Parameter]
         public string OfficeNo { get; set; } = "";
 
         [Inject]
@@ -30,6 +27,7 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
         [Inject]
         MstOfficeClient MstOfficeClient { get; set; }
 
+        private EditMode editMode;
         private MstOfficeDisabled disabled = new MstOfficeDisabled(EditMode.新規);
         private List<ComboEntity> combo多機能要件;
         private M_事業所ViewEntity editData = new M_事業所ViewEntity();
@@ -39,9 +37,11 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
         protected override async Task OnInitializedAsync()
         {
             var viewModel = await MstOfficeClient.GetViewModel(OfficeNo);
+            var editMode = string.IsNullOrEmpty(OfficeNo) ? EditMode.新規 : EditMode.修正;
+            this.editMode = editMode;
             editData = viewModel.Data;
             combo多機能要件 = viewModel.Combo多機能要件;
-            disabled = new MstOfficeDisabled(EditMode);
+            disabled = new MstOfficeDisabled(editMode);
         }
 
         private void AddRow()
@@ -71,8 +71,8 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
             var notificationMessage = new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "登録しました。", Detail = "", Duration = 4000 };
             NotificationService.Notify(notificationMessage);
 
-            EditMode = EditMode.修正;
-            this.disabled = new MstOfficeDisabled(EditMode);
+            this.editMode = EditMode.修正;
+            this.disabled = new MstOfficeDisabled(this.editMode);
         }
 
         private async Task Delete()
@@ -96,7 +96,7 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
 
         private async Task<RequestResult> SaveResult()
         {
-            return EditMode switch
+            return this.editMode switch
             {
                 EditMode.新規 => await MstOfficeClient.Register(this.editData),
                 EditMode.修正 => await MstOfficeClient.Update(this.editData),
@@ -106,7 +106,7 @@ namespace BlazorBase.Client.Pages.Master.MstOffice
 
         private void Cancel()
         {
-            NavManager.NavigateTo("MstOfficeListPage");
+            NavManager.NavigateTo("MstOfficeList");
         }
     }
 }

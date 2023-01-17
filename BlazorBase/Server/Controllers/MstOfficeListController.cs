@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlazorBase.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class MstOfficeListController : Framework.ControllerBase
+    [Route("api/[controller]")]
+    public class MstOfficeListController : ControllerBase
     {
         private readonly MstOfficeUseCase _useCase;
 
