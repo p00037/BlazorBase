@@ -1,12 +1,10 @@
-﻿@page "/MstOfficeListPage"
+﻿@page "/MstOfficeList"
 @using BlazorBase.Shared.ViewModels.MstOffice
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @attribute [Authorize]
 
 <PageTitle>事業所マスタ一覧</PageTitle>
-
-@*<h1>事業所一覧</h1>*@
 
 @if (searchResultEntities == null)
 {
@@ -51,7 +49,7 @@ else
                     <Columns>
                         <RadzenDataGridColumn Width="60px" TItem="M_事業所ViewEntity" Frozen="true" Sortable="false">
                             <Template Context="data">
-                                <RadzenLink Path="@data.Url" Text="編集" Icon="edit" />
+                                <RadzenLink Path="@GetUpdateURL(@data.事業所番号)" Text="編集" Icon="edit" />
                             </Template>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="M_事業所ViewEntity" Property="事業所番号" Title="事業所番号" Frozen="true" Width="100px" />

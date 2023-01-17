@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlazorBase.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class MstOfficeController : Framework.ControllerBase
+    [Route("api/[controller]")]
+    public class MstOfficeController : ControllerBase
     {
         private readonly MstOfficeUseCase _useCase;
 
@@ -56,7 +56,7 @@ namespace BlazorBase.Server.Controllers
         [HttpPost]
         public ActionResult<RequestResult> Post([FromBody] M_事業所ViewEntity value)
         {
-            return Excute(() =>
+            return ApiResult.Execute(() =>
             {
                 var domainEntity = M_事業所Convertor.ConvertDomain(value);
                 _useCase.Update(domainEntity);
@@ -66,7 +66,7 @@ namespace BlazorBase.Server.Controllers
         [HttpPut]
         public ActionResult<RequestResult> Put([FromBody] M_事業所ViewEntity value)
         {
-            return Excute(() =>
+            return ApiResult.Execute(() =>
             {
                 var domainEntity = M_事業所Convertor.ConvertDomain(value);
                 _useCase.Register(domainEntity);
@@ -76,7 +76,7 @@ namespace BlazorBase.Server.Controllers
         [HttpDelete]
         public ActionResult<RequestResult> Delete([FromBody] M_事業所ViewEntity value)
         {
-            return Excute(() =>
+            return ApiResult.Execute(() =>
             {
                 var domainEntity = M_事業所Convertor.ConvertDomain(value);
                 _useCase.Delete(domainEntity);

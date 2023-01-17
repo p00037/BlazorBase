@@ -34,8 +34,8 @@ namespace BlazorBase.Client.Pages.Master.MstLoginUser
             var viewModel = await MstLoginUserClient.GetViewModel(UserName);
             var editMode = string.IsNullOrEmpty(UserName) ? EditMode.新規 : EditMode.修正;
             this.editMode = editMode;
-            editData = viewModel.Data;
-            disabled = new MstLoginUserDisabled(editMode);
+            this.editData = viewModel.Data;
+            this.disabled = new MstLoginUserDisabled(editMode);
         }
 
         private async Task Save()
@@ -78,12 +78,12 @@ namespace BlazorBase.Client.Pages.Master.MstLoginUser
 
         private async Task<RequestResult> SaveResult()
         {
-            if (string.IsNullOrEmpty(UserName))
+            return this.editMode switch
             {
-                return await MstLoginUserClient.Register(this.editData);
-            }
-
-            return await MstLoginUserClient.Update(this.editData);
+                EditMode.新規 => await MstLoginUserClient.Register(this.editData),
+                EditMode.修正 => await MstLoginUserClient.Update(this.editData),
+                _ => throw new NotImplementedException(),
+            };
         }
 
         private void Cancel()

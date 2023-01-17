@@ -4,7 +4,7 @@ using BlazorBase.Domain.Models.LoginUser;
 using BlazorBase.Server.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace BlazorBase.Server.Controllers
+namespace BlazorBase.Server.Areas.Identity
 {
     public class IdentityUserManager : IIdentityUserManager
     {
@@ -49,7 +49,7 @@ namespace BlazorBase.Server.Controllers
 
         public async Task UpdateAsync(M_ログインユーザーEntity value)
         {
-            if(string.IsNullOrEmpty(value.Password))
+            if (string.IsNullOrEmpty(value.Password))
             {
                 return;
             }

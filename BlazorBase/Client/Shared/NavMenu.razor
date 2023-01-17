@@ -17,13 +17,13 @@
     <RadzenPanelMenu Style="width:270px">
         <RadzenPanelMenuItem Text="トップページ" Icon="home" Path="/"></RadzenPanelMenuItem>
         <RadzenPanelMenuItem Text="マスタ" Icon="view_list">
-            <RadzenPanelMenuItem Text="事業所マスタ" Path="MstOfficeListPage"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="事業所マスタ" Path="MstOfficeList"></RadzenPanelMenuItem>
             <RadzenPanelMenuItem Text="ユーザーマスタ" Path="MstLoginUserList"></RadzenPanelMenuItem>
         </RadzenPanelMenuItem>
         <RadzenPanelMenuItem Text="ファイル操作" Icon="description">
-            <RadzenPanelMenuItem Text="アップロード" Path="UploadTestPage"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="ダウンロード" Path="DownloadTestPage"></RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="PDF表示" Path="PdfTestPage"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="アップロード" Path="UploadTest"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="ダウンロード" Path="DownloadTest"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="PDF表示" Path="PdfTest"></RadzenPanelMenuItem>
         </RadzenPanelMenuItem>
         <RadzenPanelMenuItem Text="アカウント" Icon="account_box">
             <AuthorizeView>
@@ -31,13 +31,11 @@
                     <RadzenPanelMenuItem Text="ログアウト" Path="LogoutPage"></RadzenPanelMenuItem>
                 </Authorized>
                 <NotAuthorized>
-                    @*<RadzenPanelMenuItem Text="登録" Path="authentication/register"></RadzenPanelMenuItem>*@
                     <RadzenPanelMenuItem Text="ログイン" Path="authentication/login"></RadzenPanelMenuItem>
                 </NotAuthorized>
             </AuthorizeView>
         </RadzenPanelMenuItem>
     </RadzenPanelMenu>
-
 </div>
 
 @code {

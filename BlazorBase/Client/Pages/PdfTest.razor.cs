@@ -4,7 +4,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorBase.Client.Pages
 {
-    public partial class PdfTestPage : ComponentBase
+    public partial class PdfTest : ComponentBase
     {
         [Inject]
         IJSRuntime? JS { get; set; }

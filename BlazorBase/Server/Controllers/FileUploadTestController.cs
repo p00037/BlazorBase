@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorBase.Server.Controllers
 {
-    //[Route("api/[controller]")]
     [ApiController]
     public class FileUploadTestController : ControllerBase
     {
@@ -17,7 +16,7 @@ namespace BlazorBase.Server.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpPost("upload/multiple/{id}")]
+        [HttpPost("api/upload/multiple/{id}")]
         public async Task<IActionResult> OnPostUploadAsync([FromForm(Name = "files")] ICollection<IFormFile> files, string id)
         {
             long size = files.Sum(f => f.Length);
@@ -27,7 +26,6 @@ namespace BlazorBase.Server.Controllers
                 if (formFile.Length > 0)
                 {
                     var fileName = formFile.FileName;
-                    //var filePath = Path.GetTempFileName();
                     var filePath = $"{_webHostEnvironment.WebRootPath}\\upload\\{id}.txt";
 
                     using (var stream = System.IO.File.Create(filePath))
@@ -37,14 +35,10 @@ namespace BlazorBase.Server.Controllers
                 }
             }
 
-            // Process uploaded files
-            // Don't rely on or trust the FileName property without validation.
-
             return Ok(new { count = files.Count, size });
         }
 
-        // POST api/<MstLoginUserController>
-        [HttpPost("upload/filecheck")]
+        [HttpPost("api/upload/filecheck")]
         public ActionResult<RequestResult> Post([FromBody] UploadEntity value)
         {
             return ApiResult.Execute(() =>
